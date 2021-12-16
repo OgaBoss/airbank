@@ -1,0 +1,36 @@
+Arguments: 
+  /Users/ogaboss/.nvm/versions/node/v12.20.0/bin/node /Users/ogaboss/.nvm/versions/node/v12.20.0/bin/yarn add typescript -D
+
+PATH: 
+  /usr/local/opt/subversion@1.8/bin:/Users/ogaboss/.pyenv/shims:/Users/ogaboss/.nvm/versions/node/v12.20.0/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/ogaboss/.cargo/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  12.20.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/ogaboss/Projects/airbank/api/package.json: Unexpected token } in JSON at position 83
+      at JSON.parse (<anonymous>)
+      at /Users/ogaboss/.nvm/versions/node/v12.20.0/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/ogaboss/.nvm/versions/node/v12.20.0/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /Users/ogaboss/.nvm/versions/node/v12.20.0/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
