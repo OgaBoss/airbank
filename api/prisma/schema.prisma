@@ -21,7 +21,7 @@ enum Currency {
 
 model Transactions {
     id             String       @id @default(uuid())
-    account         String
+    account        String
     description    String?
     category       String?
     reference      String?

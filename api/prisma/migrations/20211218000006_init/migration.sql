@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "transactions" ALTER COLUMN "transactionDate" SET DATA TYPE TEXT,
+ALTER COLUMN "createdAt" SET DATA TYPE TEXT,
+ALTER COLUMN "updatedAt" SET DATA TYPE TEXT;
