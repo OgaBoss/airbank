@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { PrismaClient, Transactions } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 import { Service } from "typedi";
 import GetTransactionsArgs from "./GetTransactionsArgs";
 import dayjs from "dayjs";
@@ -25,7 +25,7 @@ export default class TransactionRepository {
     })
   }
 
-  async getTransaction(id: string): Promise<Transactions | null> {
+  async getTransaction(id: string): Promise<Transaction | null> {
     const result = await this.prisma.transactions.findUnique({
       where: {
         id

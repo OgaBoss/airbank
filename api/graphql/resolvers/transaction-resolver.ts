@@ -5,7 +5,6 @@ import { Service } from "typedi";
 import TransactionRepository from "./transaction-repository";
 import GetTransactionsArgs from "./GetTransactionsArgs";
 import dayjs from "dayjs";
-import {Transactions} from "@prisma/client";
 
 
 const advancedFormat = require('dayjs/plugin/advancedFormat')
