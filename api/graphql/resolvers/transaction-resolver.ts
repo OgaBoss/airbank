@@ -1,19 +1,30 @@
 import 'reflect-metadata';
-import { Resolver, Query, Args, FieldResolver, Root, Arg, Ctx } from 'type-graphql';
-import { Transaction } from '../types/transaction';
-import { Service } from 'typedi';
-import TransactionRepository from './transaction-repository';
-import GetTransactionsArgs from './GetTransactionsArgs';
 import dayjs from 'dayjs';
+import { Service } from 'typedi';
+import { TransactionError } from '../types/error';
+import { Transaction } from '../types/transaction';
+import GetTransactionsArgs from './GetTransactionsArgs';
+import TransactionRepository from './transaction-repository';
+import { Resolver, Query, Args, FieldResolver, Root, Arg, createUnionType } from 'type-graphql';
 
 const advancedFormat = require('dayjs/plugin/advancedFormat');
 dayjs.extend(advancedFormat);
 
+const TransactionErrorUnion = createUnionType({
+  name: 'TransactionErrorUnion',
+  types: () => [Transaction, TransactionError],
+  resolveType: value => {
+    if ('message' in value) {
+      return TransactionError
+    }
+
+    return Transaction
+  }
+});
+
 @Service()
 @Resolver((of) => Transaction)
 export class TransactionResolver {
-  private transactionCollection: Transaction[] = [];
-
   constructor(private readonly repository: TransactionRepository) {}
 
   @Query((returns) => [Transaction])
@@ -21,9 +32,13 @@ export class TransactionResolver {
     return await this.repository.getTransactions(options);
   }
 
-  @Query((returns) => Transaction)
-  async transaction(@Arg('id') id: string) {
-    return await this.repository.getTransaction(id);
+  @Query((returns) => TransactionErrorUnion)
+  async transaction(@Arg('id') id: string): Promise<typeof TransactionErrorUnion> {
+    try {
+      return await this.repository.getTransaction(id);
+    } catch (e: any) {
+      return { message: e.message }
+    }
   }
 
   @FieldResolver()

@@ -4,6 +4,7 @@ import { Service } from 'typedi';
 import GetTransactionsArgs from './GetTransactionsArgs';
 import dayjs from 'dayjs';
 import { Transaction } from '../types/transaction';
+import {TransactionNotFoundError} from "../errors/transaction-error";
 
 @Service()
 export default class TransactionRepository {
@@ -25,7 +26,7 @@ export default class TransactionRepository {
     });
   }
 
-  async getTransaction(id: string): Promise<Transaction | null> {
+  async getTransaction(id: string): Promise<Transaction> {
     const result = await this.prisma.transactions.findUnique({
       where: {
         id,
@@ -33,7 +34,7 @@ export default class TransactionRepository {
     });
 
     if (!result) {
-      throw new Error(`Transaction of id ${id} does not exits in our system`);
+      throw new TransactionNotFoundError(`Transaction of id ${id} does not exits in our system`);
     }
 
     return result;
