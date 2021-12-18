@@ -1,12 +1,12 @@
-import "reflect-metadata";
-import {registerEnumType} from "type-graphql";
+import 'reflect-metadata';
+import { registerEnumType } from 'type-graphql';
 
 enum Status {
-  BOOKED = "BOOKED",
+  BOOKED = 'BOOKED',
 }
 
 registerEnumType(Status, {
-  name: "Status"
+  name: 'Status',
 });
 
-export default Status
+export default Status;

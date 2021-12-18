@@ -1,13 +1,13 @@
-import "reflect-metadata";
-import {registerEnumType} from "type-graphql";
+import 'reflect-metadata';
+import { registerEnumType } from 'type-graphql';
 
 enum Currency {
   EUR = 'EUR',
-  GBP = 'GBP'
+  GBP = 'GBP',
 }
 
 registerEnumType(Currency, {
-  name: "Currency"
+  name: 'Currency',
 });
 
-export default Currency
+export default Currency;

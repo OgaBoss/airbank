@@ -1,13 +1,13 @@
-import 'reflect-metadata'
-import { PrismaClient } from '@prisma/client'
-import { Service } from "typedi";
-import GetTransactionsArgs from "./GetTransactionsArgs";
-import dayjs from "dayjs";
-import {Transaction} from "../types/transaction";
+import 'reflect-metadata';
+import { PrismaClient } from '@prisma/client';
+import { Service } from 'typedi';
+import GetTransactionsArgs from './GetTransactionsArgs';
+import dayjs from 'dayjs';
+import { Transaction } from '../types/transaction';
 
 @Service()
 export default class TransactionRepository {
-  prisma: PrismaClient = new PrismaClient()
+  prisma: PrismaClient = new PrismaClient();
 
   async getTransactions(options: GetTransactionsArgs): Promise<Transaction[]> {
     return await this.prisma.transactions.findMany({
@@ -16,26 +16,26 @@ export default class TransactionRepository {
       where: {
         transactionDate: {
           gte: options.start ? dayjs(options.start).toDate() : undefined,
-          lt:  options.end ? dayjs(options.end).toDate() : undefined
+          lt: options.end ? dayjs(options.end).toDate() : undefined,
         },
       },
       orderBy: {
-        transactionDate: 'desc'
-      }
-    })
+        transactionDate: 'desc',
+      },
+    });
   }
 
   async getTransaction(id: string): Promise<Transaction | null> {
     const result = await this.prisma.transactions.findUnique({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
 
     if (!result) {
-      throw new Error(`Transaction of id ${id} does not exits in our system`)
+      throw new Error(`Transaction of id ${id} does not exits in our system`);
     }
 
-    return result
+    return result;
   }
 }
