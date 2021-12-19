@@ -14,7 +14,8 @@
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "jest"
+      "jest",
+      "vue-cli-plugin-apollo/types"
     ],
     "paths": {
       "@/*": [
@@ -37,5 +38,7 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "files": ["./graphql.d.ts"],
+  "allowSyntheticDefaultImports": true
 }
