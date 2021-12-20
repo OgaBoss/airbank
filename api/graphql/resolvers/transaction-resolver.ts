@@ -34,9 +34,14 @@ export class TransactionResolver {
 
   @Query((returns) => TransactionErrorUnion)
   async transaction(@Arg('id') id: string): Promise<typeof TransactionErrorUnion> {
+    console.log(id)
     try {
-      return await this.repository.getTransaction(id);
+      const response = await this.repository.getTransaction(id)
+      console.log(response)
+      return response
+      // return await this.repository.getTransaction(id);
     } catch (e: any) {
+      console.log(e)
       return { message: e.message }
     }
   }

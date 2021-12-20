@@ -1,6 +1,6 @@
 export type QueryOption = {
   take?: number;
   skip?: number;
-  start?: string;
-  end?: string;
+  start?: string | null;
+  end?: string | null;
 };

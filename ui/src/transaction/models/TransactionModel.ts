@@ -7,7 +7,7 @@ enum Status {
   BOOKED = "BOOKED",
 }
 
-export type Transaction = {
+export type TransactionModel = {
   id?: string;
   account?: string;
   description?: string;

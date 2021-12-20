@@ -13,7 +13,9 @@ const routes: Array<RouteConfig> = [
     path: "/transactions/:id",
     name: "transaction",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../transaction/pages/Transaction.vue"),
+      import(
+        /* webpackChunkName: "about" */ "../transaction/pages/Transaction.vue"
+      ),
   },
 ];
 
