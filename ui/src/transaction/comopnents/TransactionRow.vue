@@ -41,7 +41,10 @@
     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
       {{ transaction.transactionDisplayDate }}
     </td>
-    <td
+    <td v-if="$route.params.id" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      {{ transaction.createdAtDisplayDate }}
+    </td>
+    <td v-if="!$route.params.id"
         class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium"
     >
       <router-link :to="`transactions/${transaction.id}`" class="text-indigo-600 hover:text-indigo-900"

@@ -1,10 +1,10 @@
 <template>
   <tbody>
-  <tr>
-    <td class="px-6 py-4 whitespace-nowrap text-center" colspan="7">
-      No Data
-    </td>
-  </tr>
+    <tr>
+      <td class="px-6 py-4 whitespace-nowrap text-center" colspan="7">
+        No Data
+      </td>
+    </tr>
   </tbody>
 </template>
 

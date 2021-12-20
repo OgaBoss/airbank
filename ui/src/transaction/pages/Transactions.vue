@@ -2,7 +2,7 @@
   <div class="transactions-container p-5">
     <div class="header flex justify-between bg-gray-100 px-5">
       <p class="text-3xl font-bold">All Transactions</p>
-      <Pagination @handleCountChange="handleCountChange" @handlePageChange="handlePageChange" :transaction-count="transactions.length" />
+      <Pagination @handleCountChange="handleCountChange" @handlePageChange="handlePageChange" :transaction-count="transactions ? transactions.length : 0" />
       <DateSelector @handleDateChange="handleDateChange" />
     </div>
     <div class="border-b my-4"></div>
@@ -90,7 +90,9 @@ import TransactionLoading from "@/transaction/comopnents/TransactionLoading.vue"
 })
 
 export default class Transactions extends Vue {
-  public transactionStore: Transaction = getModule(Transaction, this.$store);
+  get transactionStore(): Transaction {
+    return getModule(Transaction, this.$store);
+  }
 
   public loading = false;
 
@@ -102,7 +104,7 @@ export default class Transactions extends Vue {
   }
 
   get transactions (): TransactionModel[] | null {
-    return this.transactionStore.transactions
+    return this.$store.state.Transaction.transactions
   }
 
   async handleDateChange({end, start}: { end: string, start: string }): Promise<void> {

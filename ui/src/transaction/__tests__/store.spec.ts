@@ -13,7 +13,7 @@ describe("Transaction Store", () => {
   describe("Actions", () => {
     it("can fetch all transactions", async () => {
       await store.fetchTransactions();
-      expect(store.transactions.length).toBe(2);
+      expect(store.transactions?.length).toBe(2);
       expect(store.$apollo.query).toHaveBeenCalled();
     });
 
@@ -28,7 +28,7 @@ describe("Transaction Store", () => {
     it("can update transactions state", () => {
       store.setTransactionsProperty(mockData);
 
-      expect(store.transactions.length).toBe(2);
+      expect(store.transactions?.length).toBe(2);
     });
 
     it("can update transaction state", () => {

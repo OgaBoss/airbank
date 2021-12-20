@@ -1,9 +1,9 @@
 import { Module, VuexModule, Mutation, Action } from "vuex-module-decorators";
-import { createProvider } from "@/vue-apollo";
 import gql from "graphql-tag";
 import { QueryOption } from "@/transaction/models/QueryOption";
 import { ApolloQueryResult } from "apollo-client/core/types";
 import { TransactionModel } from "@/transaction/models/TransactionModel";
+import { createProvider } from "@/vue-apollo";
 
 interface TransactionsResponse {
   transactions: TransactionModel[];
