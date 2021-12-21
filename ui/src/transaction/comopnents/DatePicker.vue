@@ -2,7 +2,7 @@
   <DatePicker v-model="range" @input="handleDateChange" is-range :masks="masks">
     <template v-slot="{ inputValue, inputEvents }">
       <div class="flex justify-start items-center h-full">
-        <span class="text-xs font-bold">Transaction Date:  </span>
+        <span class="text-xs font-bold">Transaction Date: </span>
         <input
           :value="`${inputValue.start} - ${inputValue.end}`"
           readonly

@@ -2,14 +2,20 @@
   <div class="transactions-container p-5">
     <div class="header flex justify-between bg-gray-100 px-5">
       <p class="text-3xl font-bold">All Transactions</p>
-      <Pagination @handleCountChange="handleCountChange" @handlePageChange="handlePageChange" :transaction-count="transactions ? transactions.length : 0" />
+      <Pagination
+        @handleCountChange="handleCountChange"
+        @handlePageChange="handlePageChange"
+        :transaction-count="transactions ? transactions.length : 0"
+      />
       <DateSelector @handleDateChange="handleDateChange" />
     </div>
     <div class="border-b my-4"></div>
     <div class="flex flex-col">
       <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <div
+            class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+          >
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50 sticky top-0">
                 <tr>
@@ -38,14 +44,14 @@
                     Amount
                   </th>
                   <th
-                      scope="col"
-                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
                     Status
                   </th>
                   <th
-                      scope="col"
-                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
                     Transaction Date
                   </th>
@@ -54,8 +60,15 @@
                   </th>
                 </tr>
               </thead>
-              <tbody v-if="loading === false && transactions" class="bg-white divide-y divide-gray-200">
-                <TransactionRow v-for="transaction in transactions" :key="transaction.id" :transaction="transaction" />
+              <tbody
+                v-if="loading === false && transactions"
+                class="bg-white divide-y divide-gray-200"
+              >
+                <TransactionRow
+                  v-for="transaction in transactions"
+                  :key="transaction.id"
+                  :transaction="transaction"
+                />
               </tbody>
               <TransactionLoading v-if="loading" />
               <TransactionEmpty v-if="!transactions" />
@@ -71,7 +84,7 @@
 import Transaction from "@/transaction/store";
 import { getModule } from "vuex-module-decorators";
 import { Component, Vue } from "vue-property-decorator";
-import {QueryOption} from "@/transaction/models/QueryOption";
+import { QueryOption } from "@/transaction/models/QueryOption";
 import Pagination from "@/transaction/comopnents/Pagination.vue";
 import DateSelector from "@/transaction/comopnents/DatePicker.vue";
 import TransactionRow from "@/transaction/comopnents/TransactionRow.vue";
@@ -85,10 +98,9 @@ import TransactionLoading from "@/transaction/comopnents/TransactionLoading.vue"
     TransactionEmpty,
     TransactionLoading,
     TransactionRow,
-    Pagination
+    Pagination,
   },
 })
-
 export default class Transactions extends Vue {
   get transactionStore(): Transaction {
     return getModule(Transaction, this.$store);
@@ -100,40 +112,46 @@ export default class Transactions extends Vue {
     skip: 0,
     take: 10,
     end: null,
-    start: null
+    start: null,
+  };
+
+  get transactions(): TransactionModel[] | null {
+    return this.$store.state.Transaction.transactions;
   }
 
-  get transactions (): TransactionModel[] | null {
-    return this.$store.state.Transaction.transactions
-  }
+  async handleDateChange({
+    end,
+    start,
+  }: {
+    end: string;
+    start: string;
+  }): Promise<void> {
+    this.queryOptions.end = end;
+    this.queryOptions.start = start;
 
-  async handleDateChange({end, start}: { end: string, start: string }): Promise<void> {
-    this.queryOptions.end = end
-    this.queryOptions.start = start
-
-    await this.fetchTransactions()
+    await this.fetchTransactions();
   }
 
   async handleCountChange(take: number): Promise<void> {
-    this.queryOptions.take = take
+    this.queryOptions.take = take;
 
-    await this.fetchTransactions()
+    await this.fetchTransactions();
   }
 
   async handlePageChange(skip: number): Promise<void> {
-    this.queryOptions.skip = skip
+    this.queryOptions.skip = skip;
 
-    await this.fetchTransactions()
+    await this.fetchTransactions();
   }
 
   async fetchTransactions(): Promise<void> {
-    this.loading = true
+    this.loading = true;
     try {
       await this.transactionStore.fetchTransactions(this.queryOptions);
     } catch (e) {
-      this.loading = false
+      this.loading = false;
     }
-    this.loading = false
+    this.loading = false;
   }
 
   async mounted(): Promise<void> {

@@ -12,10 +12,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({})
-export default class TransactionEmpty extends Vue {
-}
+export default class TransactionEmpty extends Vue {}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
