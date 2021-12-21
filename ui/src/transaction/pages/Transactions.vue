@@ -71,7 +71,7 @@
                 />
               </tbody>
               <TransactionLoading v-if="loading" />
-              <TransactionEmpty v-if="!transactions" />
+              <TransactionEmpty v-if="transactions && transactions.length === 0" />
             </table>
           </div>
         </div>
