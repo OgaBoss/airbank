@@ -36,3 +36,8 @@ yarn test:unit
     yarn run start
     Graphql Server should be available at http://localhost:4000/
 ```
+
+### Run  tests
+```
+    yarn run jest
+```
