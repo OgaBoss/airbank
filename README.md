@@ -15,7 +15,12 @@ yarn serve
 yarn test:unit
 ```
 
-#api
+# api
+
+## Project setup
+```
+yarn install
+```
 
 ### Env Setup
 
