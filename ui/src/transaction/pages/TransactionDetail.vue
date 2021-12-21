@@ -61,7 +61,10 @@
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
-                <TransactionRow :transaction="transaction" />
+              <tr v-if="transaction.message">
+                <td class="px-6 py-4 whitespace-nowrap text-center" colspan="8">{{transaction.message}}</td>
+              </tr>
+              <TransactionRow v-else :transaction="transaction" />
               </tbody>
             </table>
           </div>

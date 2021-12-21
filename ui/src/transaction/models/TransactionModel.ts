@@ -13,6 +13,7 @@ export type TransactionModel = {
   description?: string;
   category?: string;
   reference?: string;
+  message?: string;
   currency?: Currency;
   amount?: number;
   status?: Status;
